@@ -23,12 +23,12 @@
     "morgan": "^1.10.0",
     "mysql": "^2.18.1",
     "typescript": "^4.7.4",
-    "ts-node": "^10.9.1"
-  },
-  "devDependencies": {
+    "ts-node": "^10.9.1",
     "@types/bcrypt": "^5.0.0",
     "@types/joi": "^17.2.3",
-    "@types/jsonwebtoken": "^8.5.8",
+    "@types/jsonwebtoken": "^8.5.8"
+  },
+  "devDependencies": {
     "nodemon": "^2.0.19"
   }
 }
