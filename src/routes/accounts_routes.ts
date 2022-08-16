@@ -3,7 +3,7 @@ import {
   accountTransactions,
   createUserAccount,
   creditAccount,
-  getAlluserAccounts,
+  getAllUserAccounts,
   login,
   protect,
   withdrawFromAccount,
@@ -16,7 +16,7 @@ router.post("/login", login);
 router.post("/accounts/credit", protect, creditAccount);
 router.post("/accounts/withdraw", protect, withdrawFromAccount);
 router.post("/accounts/transfer", protect, accountTransactions);
-router.get("/accounts/fetch", getAlluserAccounts);
+router.get("/accounts/fetch", getAllUserAccounts);
 // router.get() protect
 
 export default router;

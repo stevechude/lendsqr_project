@@ -85,7 +85,7 @@ export const accountTransactions = async (req: Request, res: Response) => {
   }
 };
 
-export const getAlluserAccounts = async (req: Request, res: Response) => {
+export const getAllUserAccounts = async (req: Request, res: Response) => {
   try {
     const [allAccounts] = await db.select('*').table('bank');
     if(allAccounts)
