@@ -8,7 +8,7 @@
   "scripts": {
     "migrations": "npx knex migrate:latest --knexfile src/database/knexfile.ts",
     "build": "tsc",
-    "dev": "ts-node ./src/app.ts"
+    "start": "ts-node ./src/app.ts"
   },
   "dependencies": {
     "@types/morgan": "^1.9.3",
