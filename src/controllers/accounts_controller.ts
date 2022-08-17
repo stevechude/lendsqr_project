@@ -14,7 +14,7 @@ export const createUserAccount = async (req: Request, res: Response) => {
   try {
     const newAccount = await createAccount(req.body);
     // console.log(newAccount)
-    res.status(200).json({ msg: "Account created successfully.", newAccount });
+    res.status(200).json(newAccount);
   } catch (error) {
     console.error(error);
     res.status(500).json("something went wrong");
@@ -24,11 +24,14 @@ export const createUserAccount = async (req: Request, res: Response) => {
 export const login = async (req: Request, res: Response) => {
   try {
     const login = await userLogin(req.body);
-    const {error} = validate(req.body);
+    const { error } = validate(req.body);
     if (error) return res.status(400).send(error.details[0].message);
     // console.log(login);
-    const [user] = await db.from("bank").select("*").where("email", "=", req.body.email);
-    if(user) {
+    const [user] = await db
+      .from("bank")
+      .select("*")
+      .where("email", "=", req.body.email);
+    if (user) {
       const token = jwt.sign(
         { _id: user.email, accountNumber: user.account_number },
         `${process.env.JWT_SECRET}`
@@ -41,7 +44,6 @@ export const login = async (req: Request, res: Response) => {
         });
       }
     }
-    
   } catch (error) {
     console.error(error);
     res.status(500).json("network error, something went wrong.");
@@ -87,9 +89,10 @@ export const accountTransactions = async (req: Request, res: Response) => {
 
 export const getAllUserAccounts = async (req: Request, res: Response) => {
   try {
-    const [allAccounts] = await db.select('*').table('bank');
-    if(allAccounts)
-    res.status(200).json(allAccounts);
+    const [allAccounts] = await db.select("*").table("bank");
+    if (allAccounts) {
+      res.status(200).json(allAccounts);
+    }
   } catch (error) {
     console.error(error);
     res.status(500).json("network error, something went wrong.");
@@ -108,11 +111,10 @@ export const protect = async (
   if (!token) return res.status(401).send("Access Denied");
 
   try {
-   const decoded: any = jwt.verify(token, `${process.env.JWT_SECRET}`)
-   if(decoded){
-
-     next();
-   }
+    const decoded: any = jwt.verify(token, `${process.env.JWT_SECRET}`);
+    if (decoded) {
+      next();
+    }
   } catch (error) {
     res.status(401).json("not authorized");
   }

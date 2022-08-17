@@ -11,10 +11,10 @@ function generateAccountNumber() {
 export const createAccount = async (newAccount: any) => {
   const { first_name, last_name, email, password, balance } = newAccount;
 
-  // const emailExists = await db.select('email', 'password').from('bank');
-  // if(emailExists === email && ) {
-  //   return 'User account already exists!'
-  // }
+  const emailExists = await db.select('email').from('bank').where('email', '=', email);
+  if(emailExists) {
+    return 'User account already exists!'
+  }
   const salt = await bcrypt.genSalt(10);
   const hashedPassword = await bcrypt.hash(password, salt);
 
@@ -26,7 +26,7 @@ export const createAccount = async (newAccount: any) => {
     balance,
     account_number: generateAccountNumber(),
   });
-  return newAccount;
+  return ({msg: "Account created successfully.", newAccount});
 };
 
 // FUNCTION exported to controller for login a user in.

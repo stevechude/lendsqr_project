@@ -23,10 +23,10 @@ function generateAccountNumber() {
 // FUNCTION exported to controller for creating a user's bank account
 const createAccount = (newAccount) => __awaiter(void 0, void 0, void 0, function* () {
     const { first_name, last_name, email, password, balance } = newAccount;
-    // const emailExists = await db.select('email', 'password').from('bank');
-    // if(emailExists === email && ) {
-    //   return 'User account already exists!'
-    // }
+    const emailExists = yield db_1.default.select('email').from('bank').where('email', '=', email);
+    if (emailExists) {
+        return 'User account already exists!';
+    }
     const salt = yield bcrypt_1.default.genSalt(10);
     const hashedPassword = yield bcrypt_1.default.hash(password, salt);
     const accountCreated = yield (0, db_1.default)("bank").insert({
@@ -37,7 +37,7 @@ const createAccount = (newAccount) => __awaiter(void 0, void 0, void 0, function
         balance,
         account_number: generateAccountNumber(),
     });
-    return newAccount;
+    return ({ msg: "Account created successfully.", newAccount });
 });
 exports.createAccount = createAccount;
 // FUNCTION exported to controller for login a user in.

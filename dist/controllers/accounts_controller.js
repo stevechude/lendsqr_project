@@ -20,7 +20,7 @@ const createUserAccount = (req, res) => __awaiter(void 0, void 0, void 0, functi
     try {
         const newAccount = yield (0, utils_1.createAccount)(req.body);
         // console.log(newAccount)
-        res.status(200).json({ msg: "Account created successfully.", newAccount });
+        res.status(200).json(newAccount);
     }
     catch (error) {
         console.error(error);
@@ -35,7 +35,10 @@ const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         if (error)
             return res.status(400).send(error.details[0].message);
         // console.log(login);
-        const [user] = yield db_1.default.from("bank").select("*").where("email", "=", req.body.email);
+        const [user] = yield db_1.default
+            .from("bank")
+            .select("*")
+            .where("email", "=", req.body.email);
         if (user) {
             const token = jsonwebtoken_1.default.sign({ _id: user.email, accountNumber: user.account_number }, `${process.env.JWT_SECRET}`);
             if (login) {
@@ -94,9 +97,10 @@ const accountTransactions = (req, res) => __awaiter(void 0, void 0, void 0, func
 exports.accountTransactions = accountTransactions;
 const getAllUserAccounts = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const [allAccounts] = yield db_1.default.select('*').table('bank');
-        if (allAccounts)
+        const [allAccounts] = yield db_1.default.select("*").table("bank");
+        if (allAccounts) {
             res.status(200).json(allAccounts);
+        }
     }
     catch (error) {
         console.error(error);
