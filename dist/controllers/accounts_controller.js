@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.protect = exports.getAlluserAccounts = exports.accountTransactions = exports.withdrawFromAccount = exports.creditAccount = exports.login = exports.createUserAccount = void 0;
+exports.protect = exports.getAllUserAccounts = exports.accountTransactions = exports.withdrawFromAccount = exports.creditAccount = exports.login = exports.createUserAccount = void 0;
 const utils_1 = require("../service/utils");
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const db_1 = __importDefault(require("../database/db"));
@@ -92,7 +92,7 @@ const accountTransactions = (req, res) => __awaiter(void 0, void 0, void 0, func
     }
 });
 exports.accountTransactions = accountTransactions;
-const getAlluserAccounts = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const getAllUserAccounts = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const [allAccounts] = yield db_1.default.select('*').table('bank');
         if (allAccounts)
@@ -103,7 +103,7 @@ const getAlluserAccounts = (req, res) => __awaiter(void 0, void 0, void 0, funct
         res.status(500).json("network error, something went wrong.");
     }
 });
-exports.getAlluserAccounts = getAlluserAccounts;
+exports.getAllUserAccounts = getAllUserAccounts;
 // Middleware Function
 const protect = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     let token = req.header("x-auth-token");
