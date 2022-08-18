@@ -33,3 +33,6 @@ http://localhost:8080/accounts/credit (to fund account) N/B add token to header
 http://localhost:8080/accounts/withdraw (to make withdrawals) N/B add token to header
 http://localhost:8080/accounts/transfer (to transfer funds to another user's account)
 http://localhost:8080/accounts/fetch (to get all the account holders in the accounts table)
+
+## API 
+https://lendsqr-bank.herokuapp.com/accounts/fetch
