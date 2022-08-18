@@ -20,3 +20,6 @@ Submission mode:
 ● Deploy the API on heroku or any free hosting cloud server
 ● Share the API postman collection public URL
 ● Share the Github Repo URL
+
+## IMPLEMENTATION
+view README2.md for the implementation.
